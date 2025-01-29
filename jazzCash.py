@@ -1,78 +1,80 @@
-# show balance function
-def show_balance():
-    print(f"*****Your Balance is Rs.{balance}*****")
-# send mony function
-def send_mony():
-    send_amount = int(input("Enter Your Send amount: "))
-    # agar send amount balance k equal ya is sy kam ho tab ya print ho ga
-    if send_amount <= balance:
-        print(f" ******Your {send_amount} amount Send Successful******* ")
-        return send_amount
-    # agr send amount 0 ya is sy kam yani mins me ho tab ya print hoga
-    elif send_amount <= 0:
-        print("*****Please Enter a valid amount*****")
-        return 0
-    # agr send amount balance sy zayada ho tab ya print hoga
-    elif send_amount > balance:
-        print("*****You have insufficient Balance***** ")
-        return 0
-        
-    else:
-        return 0
-def jazz_load():
-    load = int(input("Enter Jazz Load Amount: "))
-    # agr load ki raqam 0 ya is kam yani mins ho tab ya print ho ga
-    if load <= 0:
-        print("*****Please Enter a valid amount*****")
-        return 0
-    # agr load ki raaqam balance sy zyzda hoe tab ya print ho ga
-    elif load > balance:
-        print("*****You have insufficient balance*****")
-        return 0
-    
-    l_no = int(input("Enter Your load No: "))
-    # agr load no is equl to load num than print this
-    if l_no == load_num:
-        print(f"*****Your {load} Load in this Num {l_no} is Successful loaded*****")
-        return 0
-    # if no is not equal to load num than print this 
-    elif l_no != load_num:
-        print("*****Please Enter a valid no*****")
-        return 0
-    # if load amount is greater than balance than print this
-    elif load > balance:
-        print("*****You have insufficient balance: *****")
-        return 0
-    else:
-        return 
-    
 
+# JazzCash App
+def show_balance(balance):
+    print(f"***** Your Balance is Rs.{balance} *****")
+
+def send_money(balance):
+    try:
+        send_amount = int(input("Enter the amount to send: "))
+        # Check if the amount is valid
+        if send_amount <= 0:
+            print("***** Please enter a valid amount *****")
+            return balance
+        # Check if the user has enough balance to send the amount
+        elif send_amount > balance:
+            print("***** You have insufficient balance *****")
+            return balance
+        # If the amount is valid and the user has enough balance
+        else:
+            print(f"****** Your {send_amount} amount sent successfully *******")
+            return balance - send_amount
+    except ValueError:
+        # if the user enters a string or any other invalid input
+        print("***** Please enter a valid number *****")
+        return balance
+
+def jazz_load(balance, load_num):
+    try:
+        # Get the amount to load
+        load = int(input("Enter Jazz Load Amount: "))
+        # Check if the amount is valid
+        if load <= 0:
+            print("***** Please enter a valid amount *****")
+            return balance
+        # Check if the user has enough balance to load the amount
+        elif load > balance:
+            print("***** You have insufficient balance *****")
+            return balance
+        l_no = int(input("Enter your load number: "))
+        # Check if the load number is valid
+        if l_no == load_num:
+            print(f"***** Your {load} load to number {l_no} is successfully loaded *****")
+            return balance - load
+        # If the load number is invalid
+        else:
+            print("***** Please enter a valid number *****")
+            return balance
+        # If the amount is valid and the user has invalid number
+    except ValueError:
+        print("***** Please enter a valid number *****")
+        return balance
 
 balance = 500
-load_num = 923012345678
+load_num = 9230123
 is_running = True
 
 while is_running:
     print("Welcome to my JazzCash App")
-    print("1.Check Balance")
-    print("2.Send Mony")
-    print("3.Jazz Load")
-    print("4.Exit")
+    print("1. Check Balance")
+    print("2. Send Money")
+    print("3. Jazz Load")
+    print("4. Exit")
 
-    choice = input("Enter Your Choice No (1-4): ")
+    choice = input("Enter your choice (1-4): ")
     if choice == "1":
-        # if user choice 1 than show balance
-        show_balance()
+        # if the user choice is 1 then show the balance
+        show_balance(balance)
     elif choice == "2":
-        # if user choice 2 than than send mony
-        balance -= send_mony()
-    elif choice == "3": 
-        # if uer choice 3 than user send load
-        balance -= jazz_load()
+        # if the user choice is 2 then send the money
+        balance = send_money(balance)
+    elif choice == "3":
+        # if the user choice is 3 then load the jazz
+        balance = jazz_load(balance, load_num)
     elif choice == "4":
+        # if the user choice is 4 then exit the app
         is_running = False
+        # if the user enters any other choice
     else:
-        print("****Please Enter a Valid Choice*****")
-        
+        print("**** Please enter a valid choice *****")
 
-print("*****Thanks For using my JazzCash App. Have a good day*****")
+print("***** Thanks for using my JazzCash App. Have a good day *****")
