@@ -50,7 +50,7 @@ def jazz_load(balance, load_num):
         return balance
 
 balance = 500
-load_num = 9230123
+load_num = 92301234567
 is_running = True
 
 while is_running:
